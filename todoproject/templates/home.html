@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="banner">
                 <div class="banner-text">
-                    <h1>ToDO App</h1>
+                    <h1>ToDo App</h1>
                 </div>
             </div>
         </div>
@@ -16,35 +16,51 @@
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
-            <h4><b>Add New Task</b></h4> <!-- Added heading for the form -->
-            <form method="POST" class="p-3 shadow">
-                {% csrf_token %}
-                <div class="form-group">
-                    <input type="text" class="form-control" name="task" placeholder="Taskname">
+            <div class="mb-4">
+                <h4 class="text-uppercase font-weight-bold" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);"><b>Add
+                    New Task</b></h4>
+            </div>
+            <div class="card shadow-lg rounded-lg p-2">
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control form-control-lg" name="task" placeholder="Taskname">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control form-control-lg" name="priority"
+                                   placeholder="Enter your priority">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="date" class="form-control form-control-lg" name="date"
+                                   placeholder="Enter date">
+                        </div>
+                        <input type="submit" class="btn btn-success btn-submit">
+                    </form>
                 </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="priority" placeholder="Enter your priority">
-                </div>
-                <div class="form-group">
-                    <input type="date" class="form-control" name="date" placeholder="Enter date">
-                </div>
-                <input type="submit" class="btn btn-success btn-submit">
-            </form>
+            </div>
         </div>
 
         <div class="col-md-6">
-            <h4>Task to be Completed</h4>
+            <div class="mb-4">
+                <h4 class="text-uppercase font-weight-bold" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);"><b>Task
+                    to be Completed</b></h4>
+            </div>
             {% for i in task1 %}
-                <div class="shadow card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ i.name }}</h5>
-                        <p><b>Priority: {{i.priority }}</b></p>
-                        <p><b>{{i.date}}</b></p>
-                        <a class="btn btn-danger" href="{% url 'delete' i.id %}">Done</a>
-                        <a class="btn btn-primary" href="{% url 'update' i.id %}">Update</a>
+            <div class="card shadow-lg rounded-lg mb-4" style="border-radius: 15px; padding: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold mb-3" style="font-size: 24px;"><strong>{{ i.name }}</strong>
+                    </h5>
+                    <p class="card-text mb-2" style="font-size: 18px;"><strong>Priority:</strong> <span
+                            style="font-size: 18px;">{{i.priority }}</span></p>
+                    <p class="card-text" style="font-size: 18px;"><strong>Due Date:</strong> <span
+                            style="font-size: 18px;">{{i.date}}</span></p>
+                    <div class="d-flex justify-content-end align-items-center">
+                        <a class="btn btn-danger" href="{% url 'delete' i.id %}" style="margin-right: 8px;">Done</a>
+                        <a class="btn btn-success" href="{% url 'update' i.id %}">Update</a>
                     </div>
                 </div>
-                <br>
+            </div>
             {% endfor %}
         </div>
     </div>
